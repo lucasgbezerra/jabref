@@ -147,8 +147,32 @@ class StringUtilTest {
     }
 
     @Test
-    void testGetPart() {
-        // Should be added
+    void testGetPartWhiteSpace() {
+        assertEquals("", StringUtil.getPart(" ", -1, false));
+    }
+    @Test
+    void testGetPartTerminateOnWhiteSpace() {
+        assertEquals("test", StringUtil.getPart("  test case", -1, false));
+    }
+    @Test
+    void testGetPartTeminateOnBraceWithoutBrace() {
+        assertEquals("test case", StringUtil.getPart("  test case", -1, true));
+    }
+    @Test
+    void testGetPartEndBraceOnly() {
+        assertEquals("jabRef", StringUtil.getPart("jabRef}test", -1, true));
+    }
+    @Test
+    void testGetPartOpenAndCloseBrace() {
+        assertEquals("{jabRef}", StringUtil.getPart("{jabRef}", -1, true));
+    }
+    @Test
+    void testGetPartOpenAndCloseBraceWithWhiteSpace() {
+        assertEquals("{ jabRef }", StringUtil.getPart(" { jabRef } ", -1, false));
+    }
+    @Test
+    void testGetPartStartBraceOnly() {
+        assertEquals("{ jabRef ", StringUtil.getPart("{ jabRef ", -1, true));
     }
 
     @Test
